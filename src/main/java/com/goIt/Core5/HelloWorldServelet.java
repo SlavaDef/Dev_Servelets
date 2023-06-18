@@ -27,7 +27,7 @@ public class HelloWorldServelet extends HttpServlet {
         resp.getWriter().close();
         // HttpServletRequest - це те що нам прийшло звідти можемо витягнути хедери, запити....
         // HttpServletResponse - це те куди ми записуємо відповіді
-        super.doGet(req, resp);
+       
     }
 
     @Override
