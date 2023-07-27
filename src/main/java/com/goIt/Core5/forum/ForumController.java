@@ -12,7 +12,7 @@ import org.thymeleaf.templateresolver.FileTemplateResolver;
 import java.io.IOException;
 
 
-@WebServlet("/forum/*")
+@WebServlet("/forum/*") // сервлет буде працювати за цим запитом http://localhost:8080/Dev_Servelets/forum
 public class ForumController extends HttpServlet {
 
     private TemplateEngine engine; // створили двіжок темплейта
@@ -30,6 +30,7 @@ public class ForumController extends HttpServlet {
         FileTemplateResolver resolver = new FileTemplateResolver();
         // щоб не було ерорів вказали абсолютний шлях до папки templates
         // директорія папки шаблонів місцезнаходження в корні самого проєкту
+        // не забути вказати місцеположення папки templates саме в Tomcat d bin
         resolver.setPrefix("C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\bin\\templates/");
         resolver.setSuffix(".html");
         resolver.setTemplateMode("HTML5");
