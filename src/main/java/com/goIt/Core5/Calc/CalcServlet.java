@@ -3,16 +3,16 @@ package com.goIt.Core5.Calc;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
 // калькулятор який буде рахувати через json
-@WebServlet("/api/calc")
+//@WebServlet("/calc")
 public class CalcServlet extends HttpServlet {
 
     private CalcServise calcServise; // сервіз для підрахунку
@@ -38,17 +38,24 @@ public class CalcServlet extends HttpServlet {
 
     }
 
-    private CalcRequest mapToCalcRequest(HttpServletRequest request) throws IOException {
+    private CalcRequest mapToCalcRequest(HttpServletRequest request) {
 
-        String body = request.getReader()
-                .lines()
-                .collect(Collectors.joining("\n")); // склеювання рядків через перенос
+        String body = null;
 
-        return new Gson().fromJson(body,CalcRequest.class);
+        try {
+            body = request
+                    .getReader()
+                    .lines()
+                    .collect(Collectors.joining("\n"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        return new Gson().fromJson(body, CalcRequest.class);
+    }
 
 
     }
 
 
-}
+

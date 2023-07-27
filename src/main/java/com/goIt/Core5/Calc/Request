@@ -1,0 +1,7 @@
+http://localhost:8080/Dev_Servelets/api/calc - запит в постмені -> POST запит
+
+{
+    "opperation" : "+",
+    "param1" : 5,
+    "param2" : 20
+}                             json

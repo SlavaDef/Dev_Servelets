@@ -1,13 +1,15 @@
- package com.goIt.Core5;
-/*
+package com.goIt.Core5.examples;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -23,12 +25,23 @@ import java.util.stream.Collectors;
 // також там допускаються url патерни value = "/hello/*./test"
 // "/" тут буквально все що приходить сюди нас влаштовує
 
-@WebServlet(value = "/*")
+//@WebServlet(value = "/*")
 public class HelloWorldServelet extends HttpServlet {
 
     // далі перевизначаємо один із методів (doGet) класу HttpServlet
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // створюємо сесію для користувача тобто час через який треба буде логінитись знову
+
+        HttpSession session = req.getSession(true); // створили сесію ніби кажимо якщо сесії нема то створи її
+        // сесія це джава обьект який передається в куках це пачка данних
+        session.setAttribute("key", "value");
+        session.setMaxInactiveInterval(3600); // в секундах  сесія буде активна годину
+
+        /*if(req.getSession()!=null){
+            // якщо користувач авторизувався дозволяємо йому щось робити
+        } */
+
         // + встановлюємо хедер контент тайп тобто це хтмл в якомусь кодуванні
         // зазвичай всі параметри зчитуються як рядки
         String name = req.getParameter("name");
@@ -41,7 +54,7 @@ public class HelloWorldServelet extends HttpServlet {
         resp.getWriter().write(getAllParameters(req));
 
         // + додаємо поточну дату і час
-        resp.getWriter().write("<br>Time</br>"); // перенос рядка
+        resp.getWriter().write("<br>Time new </br>"); // перенос рядка
 
         // далі отримуємо поточну дату форматуємо отриманний результат по нашому шаблону
         String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern(
@@ -54,6 +67,9 @@ public class HelloWorldServelet extends HttpServlet {
 
         // хідер оновлення це не дуже гарна практика
         // resp.setHeader("Refresh", "5"); // сторінка оновлюється кожні 5сек
+
+        // передаємо куки
+        // resp.setHeader("Set-Cookie", "TestCookie=testCookieValue");
 
         resp.getWriter().close();
 
@@ -78,9 +94,9 @@ public class HelloWorldServelet extends HttpServlet {
 
         String contentType = request.getHeader("content-type");
 
-        if("application/json".equals(contentType)){ // якщо це json то використовуємо один метод
+        if ("application/json".equals(contentType)) { // якщо це json то використовуємо один метод
             return getAllParametersGson(request);
-        }else {
+        } else {
             return getAllParametersUrlEncoded(request);// якщо ні то старий метод
         }
     }
@@ -145,4 +161,3 @@ public class HelloWorldServelet extends HttpServlet {
 
     // наступний єтап це потрібно все збілдити
 }
-*/

@@ -1,3 +1,9 @@
+plugins {
+    id 'application'
+    id 'war'
+}
+
+
 apply plugin: 'java'
 apply plugin: 'war'
 
@@ -5,19 +11,23 @@ apply plugin: 'war'
 
 repositories {
     jcenter()
+    mavenCentral()
 }
 
 dependencies {
    // testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
    // testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
    // compile 'com.google.guava:guava:23.0'
+    // https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf
+    implementation 'org.thymeleaf:thymeleaf:3.1.1.RELEASE'
+
 
     // https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api
     compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
 
-    compileOnly 'org.projectlombok:lombok:1.18.24'
-    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    compileOnly 'org.projectlombok:lombok:1.18.26'
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
 
 //    testCompile 'junit:junit:4.12'
    // implementation 'org.thymeleaf:thymeleaf:3.1.0.M2'
@@ -25,4 +35,14 @@ dependencies {
 
 // https://mvnrepository.com/artifact/com.google.code.gson/gson
     implementation 'com.google.code.gson:gson:2.10.1'
+
+    // https://mvnrepository.com/artifact/org.projectlombok/lombok
+    compileOnly 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+
+    // https://mvnrepository.com/artifact/org.projectlombok/lombok
+    compileOnly 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+}
+
+test {
+    useJUnitPlatform()
 }

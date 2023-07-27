@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class CalcRequest { // клас де поступає запит на обробку
 
-    private String operation;
+    private String opperation;
     private int param1;
     private int param2;
 

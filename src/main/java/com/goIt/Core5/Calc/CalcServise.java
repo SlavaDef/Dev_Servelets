@@ -5,7 +5,7 @@ public class CalcServise { // задача класу прийняти запи�
     public CalcResponse calculate(CalcRequest request) {
 
         int resalt = 0;
-        switch (request.getOperation()) {
+        switch (request.getOpperation()) {
             case "+" :
                 resalt = request.getParam1() + request.getParam2();
                 break;
